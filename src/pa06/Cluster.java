@@ -27,10 +27,10 @@ public class Cluster {
 		for (int i = 0; i < samples.size(); i++){
 			this.avgX += samples.get(i).getX();
 			this.avgY += samples.get(i).getY();
-			this.avgX /= this.samples.size();
-			this.avgY /= this.samples.size();
-			this.newPoint = new Sample(this.avgX, this.avgY);
+			//this.avgX /= this.samples.size();
+			//this.avgY /= this.samples.size();
 		}
+		this.newPoint = new Sample(this.avgX / this.samples.size(), this.avgY / this.samples.size());
 		return this.newPoint;
 	}
 
