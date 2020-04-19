@@ -16,11 +16,8 @@ public class KMean {
         //import original data
         ArrayList<Sample> originalData = new ArrayList<>();
         while (input.hasNext()) {
-            //System.out.println("Has next line: " + input.hasNextLine());
-            //System.out.println(input.nextInt() + " " + input.nextInt() + "\n");
             originalData.add(new Sample((double)input.nextInt(), (double)input.nextInt()));
         }
-        System.out.println(originalData.toString());
 
 
         //generate random cluster points
@@ -38,7 +35,6 @@ public class KMean {
         }
 
         //divide into clusters
-        //ArrayList<Sample>[] clusters = new ArrayList<Sample>()[numClusters];
         //build array list for each cluster point
         ArrayList[] clusters = new ArrayList[numClusters];
         for (int i = 0; i < numClusters; i++) {
@@ -47,39 +43,29 @@ public class KMean {
 
         //repeat 100 times
         for (int i = 0; i < 100; i++) {
-            //System.out.println("round: " + i);
             //input samples into each cluster
             for (Sample data : originalData) {
                 double minDistance = data.getDistance(clusterPoints[0]);
-                //System.out.println("start minDistance: " + minDistance);
                 int index = 0;
                 //find the closest points
-                //System.out.println(data.toString());
                 for (int k = 1; k < numClusters; k++) {
-                    //System.out.println("cluster point # " + k);
-                    //System.out.println(" cluster point" + clusterPoints[k]);
-                    //System.out.println("distance: " + data.getDistance(clusterPoints[k]));
                     if (data.getDistance(clusterPoints[k]) < minDistance) {
                         minDistance = data.getDistance(clusterPoints[k]);
                         index = k;
-                        // System.out.println("index: " + index);
-                       // System.out.println("minDistance now: " + minDistance);
                     }
-                    //System.out.println();
                 }
                 clusters[index].add(data);
-                //System.out.println("this data go to cluster: " + index);
             }
-            //replace the old cluster points
+            //replace each old cluster point with new avg point
             for (int h = 0; h < clusterPoints.length; h++) {
                 Cluster cluster = new Cluster(clusterPoints[h], clusters[h]);
-                //System.out.println(cluster.toString());
                 clusterPoints[h] = cluster.getNewCluster();
             }
         }
 
+        //print our final cluster points
         for(int i = 0; i < clusterPoints.length; i++){
-            System.out.println(clusterPoints[i].toString());
+            System.out.println("Final Cluster Point " + (i + 1) + ": " + clusterPoints[i].toString());
         }
     }
 }

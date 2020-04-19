@@ -34,11 +34,6 @@ public class Cluster {
 		return this.newPoint;
 	}
 
-	/*public void clear(){
-		this.samples = null;
-		this.clusterPoint = null;
-	}
-*/
 	public String toString(){
 		String result = "Cluster point: " + this.clusterPoint.toString() + " samples: ";
 		for (Sample sample : samples) {
